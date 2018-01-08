@@ -5,8 +5,14 @@ class ProductsService {
     this.endpoint = `${config.apiEndpoint}/products`;
   }
 
-  sendRequest(url) {
-    return fetch(url)
+  sendRequest(url, options = {}) {
+    const defaultOptions = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+
+    return fetch(url, { ...defaultOptions, ...options })
           .then(response => response.json());
   }
 
@@ -14,20 +20,26 @@ class ProductsService {
     return this.sendRequest(this.endpoint);
   }
 
-  getById(id) {
-    return this.sendRequest(`${this.endpoint}/${id}`);
-  }
-
   create(product) {
-    // TODO
+    return this.sendRequest(this.endpoint, {
+      method: 'POST',
+      body: JSON.stringify(product)
+    });
   }
 
   update(product) {
-    // TODO
+    const url = `${this.endpoint}/${product.id}`;
+
+    return this.sendRequest(url, {
+      method: 'PUT',
+      body: JSON.stringify(product)
+    });
   }
 
   delete(id) {
-    // TODO
+    const url = `${this.endpoint}/${id}`;
+
+    return this.sendRequest(url, { method: 'DELETE'});
   }
 }
 

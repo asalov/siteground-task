@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
+
+import { updateProduct } from '../../actions/products';
 
 import ProductFormFields from '../ProductFormFields/ProductFormFields';
 import ActionButton from '../ActionButton/ActionButton';
 
-export default class UpdateProductModal extends Component {
+class UpdateProductModal extends Component {
   constructor(props) {
     super(props);
 
-    const { name, price, currency } = this.props.product;
     this.state = {
-      name,
-      price,
-      currency
+      ...this.props.product
     };
   }
 
@@ -26,7 +25,7 @@ export default class UpdateProductModal extends Component {
   }
 
   handleUpdate = () => {
-    console.log(this.state);
+    this.props.updateProduct(this.state);
 
     this.props.onClose();
   }
@@ -50,3 +49,7 @@ export default class UpdateProductModal extends Component {
     );
   }
 }
+
+export default connect(null, {
+  updateProduct
+})(UpdateProductModal);

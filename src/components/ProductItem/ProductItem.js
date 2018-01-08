@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { canUpdate, canDelete } from '../../reducers/permissions';
 
 import UpdateButton from '../UpdateButton/UpdateButton';
 import DeleteButton from '../DeleteButton/DeleteButton';
@@ -6,7 +9,7 @@ import DeleteButton from '../DeleteButton/DeleteButton';
 import UpdateProductModal from '../UpdateProductModal/UpdateProductModal';
 import DeleteProductModal from '../DeleteProductModal/DeleteProductModal';
 
-export default class ProductItem extends Component {
+class ProductItem extends Component {
   constructor(props) {
     super(props);
 
@@ -16,32 +19,24 @@ export default class ProductItem extends Component {
     };
   }
 
-  showUpdateModal = () => {
-    this.setState({
-      updateModalVisible: true
-    });
-  };
+  showUpdateModal = () => this.toggleModal('update', true);
 
-  closeUpdateModal = () => {
-    this.setState({
-      updateModalVisible: false
-    });
-  }
+  closeUpdateModal = () => this.toggleModal('update', false);
 
-  showDeleteModal = () => {
-    this.setState({
-      deleteModalVisible: true
-    });
-  }
+  showDeleteModal = () => this.toggleModal('delete', true);
 
-  closeDeleteModal = () => {
+  closeDeleteModal = () => this.toggleModal('delete', false);
+
+  toggleModal = (name, isOpen) => {
+    const modal = `${name}ModalVisible`;
+
     this.setState({
-      deleteModalVisible: false
+      [modal]: isOpen
     });
   }
 
   render() {
-    const { product } = this.props;
+    const { product, canUpdate, canDelete } = this.props;
     const {
       updateModalVisible,
       deleteModalVisible
@@ -53,12 +48,29 @@ export default class ProductItem extends Component {
         <td>{product.price}</td>
         <td>{product.currency}</td>
         <td>
-          <UpdateButton onClick={this.showUpdateModal} />
-          <DeleteButton onClick={this.showDeleteModal} />
+          {canUpdate && <UpdateButton onClick={this.showUpdateModal} />}
+          {canDelete && <DeleteButton onClick={this.showDeleteModal} />}
         </td>
-        <UpdateProductModal product={product} show={updateModalVisible} onClose={this.closeUpdateModal} />
-        <DeleteProductModal product={product} show={deleteModalVisible} onClose={this.closeDeleteModal} />
+        {canUpdate &&
+          <UpdateProductModal
+            product={product}
+            show={updateModalVisible}
+            onClose={this.closeUpdateModal}
+          />
+        }
+        {canDelete &&
+          <DeleteProductModal
+            product={product}
+            show={deleteModalVisible}
+            onClose={this.closeDeleteModal}
+          />
+        }
       </tr>
     );
   }
 };
+
+export default connect(({ permissions }) => ({
+  canUpdate: canUpdate(permissions.data),
+  canDelete: canDelete(permissions.data)
+}), {})(ProductItem);

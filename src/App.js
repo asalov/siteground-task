@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import ProductsService from './services/ProductsService';
-import PermissionsService from './services/PermissionsService';
+import { canRead, canCreate } from './reducers/permissions';
+import { fetchPermissions } from './actions/permissions';
+import { getProducts } from './actions/products';
 
 import {
   AddProductForm,
@@ -14,34 +16,41 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.productsService = new ProductsService();
-    this.permissionsService = new PermissionsService();
-
     this.state = {
       products: [],
-      permissions: []
     };
   }
 
   componentDidMount() {
-    this.productsService.getAll().then((data) => {
-      this.setState({
-        products: data
-      });
-    });
+    this.props.fetchPermissions();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { canRead, productsFetched } = nextProps;
+
+    if (canRead && !productsFetched) {
+      this.props.getProducts();
+    }
   }
 
   render() {
-    const { products } = this.state;
-    const permissions = this.permissionsService;
+    const { canRead, canCreate, products } = this.props;
 
     return (
       <div className="container">
-        {permissions.canCreate() && <AddProductForm />}
-        {permissions.canRead() && <ListProducts products={products} />}
+        {canCreate && <AddProductForm />}
+        {canRead && <ListProducts products={products} />}
       </div>
     );
   }
 }
 
-export default App;
+export default connect(({ products, permissions }) => ({
+  products: products.data,
+  productsFetched: products.fetched,
+  canRead: canRead(permissions.data),
+  canCreate: canCreate(permissions.data)
+}), {
+  fetchPermissions,
+  getProducts
+})(App);

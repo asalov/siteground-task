@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { createProduct } from '../../actions/products';
 
 import ProductFormFields from '../ProductFormFields/ProductFormFields';
 import ActionButton from '../ActionButton/ActionButton';
 
-export default class AddProduct extends Component {
+class AddProductForm extends Component {
   constructor(props) {
     super(props);
 
@@ -29,8 +32,7 @@ export default class AddProduct extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(this.state);
-
+    this.props.createProduct(this.state);
     this.setState(this.getInitialState());
   };
 
@@ -46,3 +48,7 @@ export default class AddProduct extends Component {
     );
   }
 };
+
+export default connect(null, {
+  createProduct
+})(AddProductForm);

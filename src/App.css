@@ -5,3 +5,11 @@
 form {
   margin-bottom: 40px;
 }
+
+table button {
+  margin: 0 10px;
+}
+
+td:last-of-type {
+  text-align: right;
+}

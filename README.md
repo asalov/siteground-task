@@ -8,8 +8,12 @@ For the project to build, **these files must exist with exact filenames**:
 
 You can delete or rename the other files.
 
-## Available Scripts
+## API
+The API is built using [json-server](https://github.com/typicode/json-server).<br>
+If you have installed it globally, you can run it using the following command:<br>
+`json-server --watch db.json --port 3001`
 
+## Available Scripts
 In the project directory, you can run:
 
 ### `npm start`
