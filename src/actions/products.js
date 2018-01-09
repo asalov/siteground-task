@@ -1,4 +1,4 @@
-import ProductsService from '../services/ProductsService';
+import ProductsService from 'services/ProductsService';
 
 export const actions = {
   getProducts: 'GET_PRODUCTS',

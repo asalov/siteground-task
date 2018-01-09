@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { canRead, canCreate } from './reducers/permissions';
-import { fetchPermissions } from './actions/permissions';
-import { getProducts } from './actions/products';
+import { canRead, canCreate } from 'reducers/permissions';
+import { fetchPermissions } from 'actions/permissions';
+import { getProducts } from 'actions/products';
 
-import {
-  AddProductForm,
-  ListProducts
-} from './components';
+import AddProductForm from 'components/AddProductForm/AddProductForm';
+import ListProducts from 'components/ListProducts/ListProducts';
 
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      products: [],
-    };
-  }
-
   componentDidMount() {
     this.props.fetchPermissions();
   }

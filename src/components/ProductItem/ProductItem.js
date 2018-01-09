@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { canUpdate, canDelete } from '../../reducers/permissions';
+import { canUpdate, canDelete } from 'reducers/permissions';
 
-import UpdateButton from '../UpdateButton/UpdateButton';
-import DeleteButton from '../DeleteButton/DeleteButton';
+import {
+  UpdateButton,
+  DeleteButton
+} from 'components/buttons';
 
-import UpdateProductModal from '../UpdateProductModal/UpdateProductModal';
-import DeleteProductModal from '../DeleteProductModal/DeleteProductModal';
+import {
+  UpdateProductModal,
+  DeleteProductModal
+} from 'components/modals';
 
 class ProductItem extends Component {
   constructor(props) {
@@ -27,11 +31,11 @@ class ProductItem extends Component {
 
   closeDeleteModal = () => this.toggleModal('delete', false);
 
-  toggleModal = (name, isOpen) => {
+  toggleModal = (name, isVisible) => {
     const modal = `${name}ModalVisible`;
 
     this.setState({
-      [modal]: isOpen
+      [modal]: isVisible
     });
   }
 

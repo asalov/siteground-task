@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 
-import { deleteProduct as deleteProductItem } from '../../actions/products';
+import { deleteProduct as deleteProductItem } from 'actions/products';
 
-import ActionButton from '../ActionButton/ActionButton';
+import { ActionButton } from 'components/buttons';
 
 const DeleteProductModal = ({
   show,

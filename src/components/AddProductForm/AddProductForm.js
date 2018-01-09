@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createProduct } from '../../actions/products';
+import { createProduct } from 'actions/products';
 
-import ProductFormFields from '../ProductFormFields/ProductFormFields';
-import ActionButton from '../ActionButton/ActionButton';
+import ProductFormFields from 'components/ProductFormFields/ProductFormFields';
+import { ActionButton } from 'components/buttons';
 
 class AddProductForm extends Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import PermissionsService from '../services/PermissionsService';
+import PermissionsService from 'services/PermissionsService';
 
 export const actions = {
   fetchPermissions: 'FETCH_PERMISSIONS',
@@ -14,16 +14,16 @@ export const fetchPermissions = () => (dispatch) => {
   });
 
   permissionService.getPermissions()
-  .then((permissions) => {
-    dispatch({
-      type: actions.fetchPermissionsSuccess,
-      payload: permissions
+    .then((permissions) => {
+      dispatch({
+        type: actions.fetchPermissionsSuccess,
+        payload: permissions
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: actions.fetchPermissionsError,
+        payload: err
+      });
     });
-  })
-  .catch((err) => {
-    dispatch({
-      type: actions.fetchPermissionsError,
-      payload: err
-    });
-  });
 }

@@ -1,4 +1,4 @@
-import { actions } from '../actions/permissions';
+import { actions } from 'actions/permissions';
 
 const initialState = {
   data: [],

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 
-import { updateProduct } from '../../actions/products';
+import { updateProduct } from 'actions/products';
 
-import ProductFormFields from '../ProductFormFields/ProductFormFields';
-import ActionButton from '../ActionButton/ActionButton';
+import ProductFormFields from 'components/ProductFormFields/ProductFormFields';
+import { ActionButton } from 'components/buttons';
 
 class UpdateProductModal extends Component {
   constructor(props) {

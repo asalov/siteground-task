@@ -1,4 +1,4 @@
-import { actions } from '../actions/products';
+import { actions } from 'actions/products';
 
 const initialState = {
   data: [],
