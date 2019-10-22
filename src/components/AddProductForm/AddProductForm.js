@@ -1,34 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { createProduct } from "actions/products";
-
+import { useFormState } from "hooks/useFormState";
 import ProductFormFields from "components/ProductFormFields/ProductFormFields";
 import { ActionButton } from "components/buttons";
 
-const initialState = {
-  name: "",
-  price: "",
-  currency: ""
-};
-
 const AddProductForm = ({ createProduct }) => {
-  const [formState, setFormState] = useState(initialState);
-
-  const handleChange = e => {
-    const field = e.target;
-
-    setFormState({
-      ...formState,
-      [field.id]: field.value
-    });
-  };
+  const [formState, handleChange, resetForm] = useFormState({
+    name: "",
+    price: "",
+    currency: ""
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
 
     createProduct(formState);
-    setFormState(initialState);
+    resetForm();
   };
 
   const isFormValid = () =>

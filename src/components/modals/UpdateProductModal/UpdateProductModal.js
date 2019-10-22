@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
 
 import { updateProduct } from "actions/products";
+import { useFormState } from "hooks/useFormState";
 import ProductFormFields from "components/ProductFormFields/ProductFormFields";
 import { ActionButton } from "components/buttons";
 
 const UpdateProductModal = ({ show, product, onClose, updateProduct }) => {
-  const [productDetails, updateProductDetails] = useState({ ...product });
-
-  const handleChange = e => {
-    const field = e.target;
-
-    updateProductDetails({
-      ...productDetails,
-      [field.id]: field.value
-    });
-  };
+  const [productDetails, handleChange] = useFormState({ ...product });
 
   const handleUpdate = () => {
     updateProduct(productDetails);
