@@ -1,4 +1,4 @@
-import { actions } from 'actions/permissions';
+import { actions } from "actions/permissions";
 
 const initialState = {
   data: [],
@@ -32,26 +32,26 @@ const permissions = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 const keyExists = (permissions, key) => {
   return permissions.includes(key);
 };
 
-export const canRead = (permissions) => {
-  return keyExists(permissions, 'READ');
+export const canRead = permissions => {
+  return keyExists(permissions, "READ");
 };
 
-export const canCreate = (permissions) => {
-  return keyExists(permissions, 'CREATE');
+export const canCreate = permissions => {
+  return keyExists(permissions, "CREATE");
 };
 
-export const canUpdate = (permissions) => {
-  return keyExists(permissions, 'UPDATE');
+export const canUpdate = permissions => {
+  return keyExists(permissions, "UPDATE");
 };
 
-export const canDelete = (permissions) => {
-  return keyExists(permissions, 'DELETE');
+export const canDelete = permissions => {
+  return keyExists(permissions, "DELETE");
 };
 
 export default permissions;

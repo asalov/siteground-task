@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { createProduct } from 'actions/products';
+import { createProduct } from "actions/products";
 
-import ProductFormFields from 'components/ProductFormFields/ProductFormFields';
-import { ActionButton } from 'components/buttons';
+import ProductFormFields from "components/ProductFormFields/ProductFormFields";
+import { ActionButton } from "components/buttons";
 
 class AddProductForm extends Component {
   constructor(props) {
@@ -15,21 +15,21 @@ class AddProductForm extends Component {
 
   getInitialState() {
     return {
-      name: '',
-      price: '',
-      currency: ''
+      name: "",
+      price: "",
+      currency: ""
     };
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     const field = e.target;
 
     this.setState({
       [field.id]: field.value
     });
-  }
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
     this.props.createProduct(this.state);
@@ -47,8 +47,11 @@ class AddProductForm extends Component {
       </div>
     );
   }
-};
+}
 
-export default connect(null, {
-  createProduct
-})(AddProductForm);
+export default connect(
+  null,
+  {
+    createProduct
+  }
+)(AddProductForm);

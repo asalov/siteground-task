@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import ProductItem from 'components/ProductItem/ProductItem';
+import ProductItem from "components/ProductItem/ProductItem";
 
 const ListProducts = ({ products }) => {
-  const rows = products.map(prod =>
-    <ProductItem key={prod.id} product={prod} />);
+  const rows = products.map(prod => (
+    <ProductItem key={prod.id} product={prod} />
+  ));
 
   return (
     <div>
@@ -18,9 +19,7 @@ const ListProducts = ({ products }) => {
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          {rows}
-        </tbody>
+        <tbody>{rows}</tbody>
       </table>
     </div>
   );

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { canRead, canCreate } from 'reducers/permissions';
-import { fetchPermissions } from 'actions/permissions';
-import { getProducts } from 'actions/products';
+import { canRead, canCreate } from "reducers/permissions";
+import { fetchPermissions } from "actions/permissions";
+import { getProducts } from "actions/products";
 
-import AddProductForm from 'components/AddProductForm/AddProductForm';
-import ListProducts from 'components/ListProducts/ListProducts';
+import AddProductForm from "components/AddProductForm/AddProductForm";
+import ListProducts from "components/ListProducts/ListProducts";
 
-import './App.css';
+import "./App.css";
 
 class App extends Component {
   componentDidMount() {
@@ -35,12 +35,15 @@ class App extends Component {
   }
 }
 
-export default connect(({ products, permissions }) => ({
-  products: products.data,
-  productsFetched: products.fetched,
-  canRead: canRead(permissions.data),
-  canCreate: canCreate(permissions.data)
-}), {
-  fetchPermissions,
-  getProducts
-})(App);
+export default connect(
+  ({ products, permissions }) => ({
+    products: products.data,
+    productsFetched: products.fetched,
+    canRead: canRead(permissions.data),
+    canCreate: canCreate(permissions.data)
+  }),
+  {
+    fetchPermissions,
+    getProducts
+  }
+)(App);

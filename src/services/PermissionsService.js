@@ -1,13 +1,12 @@
-import config from 'config/config';
+import config from "config/config";
 
 class PermissionsService {
   constructor() {
     this.endpoint = `${config.apiEndpoint}/permissions`;
   }
 
-  getPermissions() {
-    return fetch(this.endpoint)
-          .then(response => response.json());
+  async getPermissions() {
+    return fetch(this.endpoint).then(response => response.json());
   }
 }
 

@@ -1,17 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import {
-  FormGroup,
-  ControlLabel,
-  FormControl
-} from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl } from "react-bootstrap";
 
-const ProductFormFields = ({
-  name,
-  price,
-  currency,
-  handleChange
-}) => (
+const ProductFormFields = ({ name, price, currency, handleChange }) => (
   <div>
     <FormGroup controlId="name">
       <ControlLabel>Name</ControlLabel>

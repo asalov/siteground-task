@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Modal } from 'react-bootstrap';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Modal } from "react-bootstrap";
 
-import { updateProduct } from 'actions/products';
+import { updateProduct } from "actions/products";
 
-import ProductFormFields from 'components/ProductFormFields/ProductFormFields';
-import { ActionButton } from 'components/buttons';
+import ProductFormFields from "components/ProductFormFields/ProductFormFields";
+import { ActionButton } from "components/buttons";
 
 class UpdateProductModal extends Component {
   constructor(props) {
@@ -16,19 +16,19 @@ class UpdateProductModal extends Component {
     };
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     const field = e.target;
 
     this.setState({
       [field.id]: field.value
     });
-  }
+  };
 
   handleUpdate = () => {
     this.props.updateProduct(this.state);
 
     this.props.onClose();
-  }
+  };
 
   render() {
     const { product, show, onClose } = this.props;
@@ -42,7 +42,11 @@ class UpdateProductModal extends Component {
           <ProductFormFields handleChange={this.handleChange} {...this.state} />
         </Modal.Body>
         <Modal.Footer>
-          <ActionButton type="primary" text="Save" onClick={this.handleUpdate} />
+          <ActionButton
+            type="primary"
+            text="Save"
+            onClick={this.handleUpdate}
+          />
           <ActionButton type="default" text="Cancel" onClick={onClose} />
         </Modal.Footer>
       </Modal>
@@ -50,6 +54,9 @@ class UpdateProductModal extends Component {
   }
 }
 
-export default connect(null, {
-  updateProduct
-})(UpdateProductModal);
+export default connect(
+  null,
+  {
+    updateProduct
+  }
+)(UpdateProductModal);
