@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { createProduct } from "actions/products";
@@ -6,48 +6,49 @@ import { createProduct } from "actions/products";
 import ProductFormFields from "components/ProductFormFields/ProductFormFields";
 import { ActionButton } from "components/buttons";
 
-class AddProductForm extends Component {
-  constructor(props) {
-    super(props);
+const initialState = {
+  name: "",
+  price: "",
+  currency: ""
+};
 
-    this.state = this.getInitialState();
-  }
+const AddProductForm = ({ createProduct }) => {
+  const [formState, setFormState] = useState(initialState);
 
-  getInitialState() {
-    return {
-      name: "",
-      price: "",
-      currency: ""
-    };
-  }
-
-  handleChange = e => {
+  const handleChange = e => {
     const field = e.target;
 
-    this.setState({
+    setFormState({
+      ...formState,
       [field.id]: field.value
     });
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
-    this.props.createProduct(this.state);
-    this.setState(this.getInitialState());
+    createProduct(formState);
+    setFormState(initialState);
   };
 
-  render() {
-    return (
-      <div>
-        <h3>Add New Product</h3>
-        <form>
-          <ProductFormFields handleChange={this.handleChange} {...this.state} />
-          <ActionButton type="primary" text="Add" onClick={this.handleSubmit} />
-        </form>
-      </div>
-    );
-  }
-}
+  const isFormValid = () =>
+    Object.values(formState).every(field => field !== "");
+
+  return (
+    <div>
+      <h3>Add New Product</h3>
+      <form>
+        <ProductFormFields handleChange={handleChange} {...formState} />
+        <ActionButton
+          type="primary"
+          text="Add"
+          disabled={!isFormValid()}
+          onClick={handleSubmit}
+        />
+      </form>
+    </div>
+  );
+};
 
 export default connect(
   null,
