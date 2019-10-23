@@ -1,38 +1,38 @@
 import ProductsService from "services/ProductsService";
 
-export const actions = {
-  getProducts: "GET_PRODUCTS",
-  getProductsSuccess: "GET_PRODUCTS_SUCCESS",
-  getProductsError: "GET_PRODUCTS_ERROR",
-  createProduct: "CREATE_PRODUCT",
-  createProductSuccess: "CREATE_PRODUCT_SUCCESS",
-  createProductError: "CREATE_PRODUCT_SUCCESS",
-  updateProduct: "UPDATE_PRODUCT",
-  updateProductSuccess: "UPDATE_PRODUCT_SUCCESS",
-  updateProductError: "UPDATE_PRODUCT_ERROR",
-  deleteProduct: "DELETE_PRODUCT",
-  deleteProductSuccess: "DELETE_PRODUCT_SUCCESS",
-  deleteProductError: "DELETE_PRODUCT_ERROR"
+export const ACTIONS = {
+  GET_PRODUCTS: "GET_PRODUCTS",
+  GET_PRODUCTS_SUCCESS: "GET_PRODUCTS_SUCCESS",
+  GET_PRODUCTS_ERROR: "GET_PRODUCTS_ERROR",
+  CREATE_PRODUCT: "CREATE_PRODUCT",
+  CREATE_PRODUCT_SUCCESS: "CREATE_PRODUCT_SUCCESS",
+  CREATE_PRODUCT_ERROR: "CREATE_PRODUCT_ERROR",
+  UPDATE_PRODUCT: "UPDATE_PRODUCT",
+  UPDATE_PRODUCT_SUCCESS: "UPDATE_PRODUCT_SUCCESS",
+  UPDATE_PRODUCT_ERROR: "UPDATE_PRODUCT_ERROR",
+  DELETE_PRODUCT: "DELETE_PRODUCT",
+  DELETE_PRODUCT_SUCCESS: "DELETE_PRODUCT_SUCCESS",
+  DELETE_PRODUCT_ERROR: "DELETE_PRODUCT_ERROR"
 };
 
 const productService = new ProductsService();
 
 export const getProducts = () => dispatch => {
   dispatch({
-    type: actions.getProducts
+    type: ACTIONS.GET_PRODUCTS
   });
 
   productService
     .getAll()
     .then(products => {
       dispatch({
-        type: actions.getProductsSuccess,
+        type: ACTIONS.GET_PRODUCTS_SUCCESS,
         payload: products
       });
     })
     .catch(err => {
       dispatch({
-        type: actions.getProductsError,
+        type: ACTIONS.GET_PRODUCTS_ERROR,
         payload: err
       });
     });
@@ -40,20 +40,20 @@ export const getProducts = () => dispatch => {
 
 export const createProduct = product => dispatch => {
   dispatch({
-    type: actions.createProduct
+    type: ACTIONS.CREATE_PRODUCT
   });
 
   productService
     .create(product)
     .then(res => {
       dispatch({
-        type: actions.createProductSuccess,
+        type: ACTIONS.CREATE_PRODUCT_SUCCESS,
         payload: res
       });
     })
     .catch(err => {
       dispatch({
-        type: actions.createProductError,
+        type: ACTIONS.CREATE_PRODUCT_ERROR,
         payload: err
       });
     });
@@ -61,20 +61,20 @@ export const createProduct = product => dispatch => {
 
 export const updateProduct = product => dispatch => {
   dispatch({
-    type: actions.updateProduct
+    type: ACTIONS.UPDATE_PRODUCT
   });
 
   productService
     .update(product)
     .then(res => {
       dispatch({
-        type: actions.updateProductSuccess,
+        type: ACTIONS.UPDATE_PRODUCT_SUCCESS,
         payload: res
       });
     })
     .catch(err => {
       dispatch({
-        type: actions.updateProductError,
+        type: ACTIONS.UPDATE_PRODUCT_ERROR,
         payload: err
       });
     });
@@ -82,7 +82,7 @@ export const updateProduct = product => dispatch => {
 
 export const deleteProduct = productId => dispatch => {
   dispatch({
-    type: actions.deleteProduct,
+    type: ACTIONS.DELETE_PRODUCT,
     payload: productId
   });
 
@@ -90,13 +90,13 @@ export const deleteProduct = productId => dispatch => {
     .delete(productId)
     .then(res => {
       dispatch({
-        type: actions.deleteProductSuccess,
+        type: ACTIONS.DELETE_PRODUCT_SUCCESS,
         payload: res
       });
     })
     .catch(err => {
       dispatch({
-        type: actions.deleteProductError,
+        type: ACTIONS.DELETE_PRODUCT_ERROR,
         payload: err
       });
     });

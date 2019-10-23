@@ -1,4 +1,4 @@
-import { actions } from "actions/products";
+import { ACTIONS } from "actions/products";
 
 const initialState = {
   data: [],
@@ -12,18 +12,18 @@ const products = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case actions.getProductsSuccess:
+    case ACTIONS.GET_PRODUCTS_SUCCESS:
       return {
         ...state,
         fetched: true,
         data: payload
       };
-    case actions.createProductSuccess:
+    case ACTIONS.CREATE_PRODUCT_SUCCESS:
       return {
         ...state,
         data: [...state.data, payload]
       };
-    case actions.updateProductSuccess:
+    case ACTIONS.UPDATE_PRODUCT_SUCCESS:
       return {
         ...state,
         data: state.data.map(product => {
@@ -34,20 +34,18 @@ const products = (state = initialState, action) => {
           return product;
         })
       };
-    case actions.deleteProduct:
+    case ACTIONS.DELETE_PRODUCT:
       deleteId = payload;
       return state;
-    case actions.deleteProductSuccess:
+    case ACTIONS.DELETE_PRODUCT_SUCCESS:
       return {
         ...state,
-        data: state.data.filter(product => {
-          return product.id !== deleteId;
-        })
+        data: state.data.filter(product => product.id !== deleteId)
       };
-    case actions.getProductsError:
-    case actions.createProductError:
-    case actions.updateProductError:
-    case actions.deleteProductError:
+    case ACTIONS.GET_PRODUCTS_ERROR:
+    case ACTIONS.CREATE_PRODUCT_ERROR:
+    case ACTIONS.UPDATE_PRODUCT_ERROR:
+    case ACTIONS.DELETE_PRODUCT_ERROR:
       return {
         ...state,
         error: payload

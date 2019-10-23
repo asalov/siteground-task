@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 
 import { updateProduct } from "actions/products";
@@ -7,11 +7,12 @@ import { useFormState } from "hooks/useFormState";
 import ProductFormFields from "components/ProductFormFields/ProductFormFields";
 import { ActionButton } from "components/buttons";
 
-const UpdateProductModal = ({ show, product, onClose, updateProduct }) => {
+const UpdateProductModal = ({ show, product, onClose }) => {
+  const dispatch = useDispatch();
   const [productDetails, handleChange] = useFormState({ ...product });
 
   const handleUpdate = () => {
-    updateProduct(productDetails);
+    dispatch(updateProduct(productDetails));
     onClose();
   };
 
@@ -31,9 +32,4 @@ const UpdateProductModal = ({ show, product, onClose, updateProduct }) => {
   );
 };
 
-export default connect(
-  null,
-  {
-    updateProduct
-  }
-)(UpdateProductModal);
+export default UpdateProductModal;

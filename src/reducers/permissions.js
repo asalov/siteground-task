@@ -1,4 +1,4 @@
-import { actions } from "actions/permissions";
+import { ACTIONS } from "actions/permissions";
 
 const initialState = {
   data: [],
@@ -11,19 +11,19 @@ const permissions = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case actions.fetchPermissions:
+    case ACTIONS.FETCH_PERMISSIONS:
       return {
         ...state,
         fetching: true
       };
-    case actions.fetchPermissionsSuccess:
+    case ACTIONS.FETCH_PERMISSIONS_SUCCESS:
       return {
         ...state,
         fetching: false,
         fetched: true,
         data: payload
       };
-    case actions.fetchPermissionsError:
+    case ACTIONS.FETCH_PERMISSIONS_ERROR:
       return {
         ...state,
         fetching: false,
@@ -32,26 +32,6 @@ const permissions = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-const keyExists = (permissions, key) => {
-  return permissions.includes(key);
-};
-
-export const canRead = permissions => {
-  return keyExists(permissions, "READ");
-};
-
-export const canCreate = permissions => {
-  return keyExists(permissions, "CREATE");
-};
-
-export const canUpdate = permissions => {
-  return keyExists(permissions, "UPDATE");
-};
-
-export const canDelete = permissions => {
-  return keyExists(permissions, "DELETE");
 };
 
 export default permissions;

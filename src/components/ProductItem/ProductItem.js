@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { canUpdate, canDelete } from "reducers/permissions";
+import { canUpdate, canDelete } from "config/permissions";
 import { UpdateButton, DeleteButton } from "components/buttons";
 import { UpdateProductModal, DeleteProductModal } from "components/modals";
 
-const ProductItem = ({ product, canUpdate, canDelete }) => {
+const ProductItem = ({ product }) => {
+  const { data } = useSelector(state => state.permissions);
+  const canUpdateProducts = canUpdate(data);
+  const canDeleteProducts = canDelete(data);
   const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
   const [isDeleteModalVisible, setDeleteModalVisibility] = useState(false);
 
@@ -15,10 +18,10 @@ const ProductItem = ({ product, canUpdate, canDelete }) => {
       <td>{product.price}</td>
       <td>{product.currency}</td>
       <td>
-        {canUpdate && (
+        {canUpdateProducts && (
           <UpdateButton onClick={() => setUpdateModalVisibility(true)} />
         )}
-        {canDelete && (
+        {canDeleteProducts && (
           <DeleteButton onClick={() => setDeleteModalVisibility(true)} />
         )}
       </td>
@@ -40,10 +43,4 @@ const ProductItem = ({ product, canUpdate, canDelete }) => {
   );
 };
 
-export default connect(
-  ({ permissions }) => ({
-    canUpdate: canUpdate(permissions.data),
-    canDelete: canDelete(permissions.data)
-  }),
-  {}
-)(ProductItem);
+export default ProductItem;

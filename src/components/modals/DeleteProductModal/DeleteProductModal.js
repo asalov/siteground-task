@@ -1,14 +1,16 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 
-import { deleteProduct as deleteProductItem } from "actions/products";
+import { deleteProduct } from "actions/products";
 
 import { ActionButton } from "components/buttons";
 
-const DeleteProductModal = ({ show, product, onClose, deleteProduct }) => {
+const DeleteProductModal = ({ show, product, onClose }) => {
+  const dispatch = useDispatch();
+
   const removeProduct = () => {
-    deleteProduct(product.id);
+    dispatch(deleteProduct(product.id));
     onClose();
   };
 
@@ -26,9 +28,4 @@ const DeleteProductModal = ({ show, product, onClose, deleteProduct }) => {
   );
 };
 
-export default connect(
-  null,
-  {
-    deleteProduct: deleteProductItem
-  }
-)(DeleteProductModal);
+export default DeleteProductModal;

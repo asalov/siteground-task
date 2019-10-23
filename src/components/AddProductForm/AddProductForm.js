@@ -1,12 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { createProduct } from "actions/products";
 import { useFormState } from "hooks/useFormState";
 import ProductFormFields from "components/ProductFormFields/ProductFormFields";
 import { ActionButton } from "components/buttons";
 
-const AddProductForm = ({ createProduct }) => {
+const AddProductForm = () => {
+  const dispatch = useDispatch();
   const [formState, handleChange, resetForm] = useFormState({
     name: "",
     price: "",
@@ -16,7 +17,7 @@ const AddProductForm = ({ createProduct }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    createProduct(formState);
+    dispatch(createProduct(formState));
     resetForm();
   };
 
@@ -39,9 +40,4 @@ const AddProductForm = ({ createProduct }) => {
   );
 };
 
-export default connect(
-  null,
-  {
-    createProduct
-  }
-)(AddProductForm);
+export default AddProductForm;
