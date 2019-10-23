@@ -6,9 +6,9 @@ import { UpdateButton, DeleteButton } from "components/buttons";
 import { UpdateProductModal, DeleteProductModal } from "components/modals";
 
 const ProductItem = ({ product }) => {
-  const { data } = useSelector(state => state.permissions);
-  const canUpdateProducts = canUpdate(data);
-  const canDeleteProducts = canDelete(data);
+  const permissions = useSelector(({ permissions }) => permissions.data);
+  const canUpdateProducts = canUpdate(permissions);
+  const canDeleteProducts = canDelete(permissions);
   const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
   const [isDeleteModalVisible, setDeleteModalVisibility] = useState(false);
 

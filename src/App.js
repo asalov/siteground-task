@@ -10,11 +10,12 @@ import ListProducts from "components/ListProducts/ListProducts";
 import "./App.css";
 
 const App = () => {
-  const productState = useSelector(state => state.products);
-  const permissionState = useSelector(state => state.permissions);
-  const { data: products, fetched: productsFetched } = productState;
-  const canReadProducts = canRead(permissionState.data);
-  const canCreateProducts = canCreate(permissionState.data);
+  const { data: products, fetched: productsFetched } = useSelector(
+    state => state.products
+  );
+  const permissions = useSelector(({ permissions }) => permissions.data);
+  const canReadProducts = canRead(permissions);
+  const canCreateProducts = canCreate(permissions);
   const dispatch = useDispatch();
 
   useEffect(() => {
