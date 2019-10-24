@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap";
 import { updateProduct } from "actions/products";
 import { useFormState } from "hooks/useFormState";
 import ProductFormFields from "components/ProductFormFields/ProductFormFields";
-import { ActionButton } from "components/buttons";
+import ActionButton from "components/ActionButton/ActionButton";
 
 const UpdateProductModal = ({ show, product, onClose }) => {
   const dispatch = useDispatch();

@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 
 import { deleteProduct } from "actions/products";
-
-import { ActionButton } from "components/buttons";
+import ActionButton from "components/ActionButton/ActionButton";
 
 const DeleteProductModal = ({ show, product, onClose }) => {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { createProduct } from "actions/products";
 import { useFormState } from "hooks/useFormState";
 import ProductFormFields from "components/ProductFormFields/ProductFormFields";
-import { ActionButton } from "components/buttons";
+import ActionButton from "components/ActionButton/ActionButton";
 
 const AddProductForm = () => {
   const dispatch = useDispatch();

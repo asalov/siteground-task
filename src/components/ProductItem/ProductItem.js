@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { canUpdate, canDelete } from "config/permissions";
-import { UpdateButton, DeleteButton } from "components/buttons";
+import ActionButton from "components/ActionButton/ActionButton";
 import { UpdateProductModal, DeleteProductModal } from "components/modals";
 
 const ProductItem = ({ product }) => {
@@ -19,10 +19,18 @@ const ProductItem = ({ product }) => {
       <td>{product.currency}</td>
       <td>
         {canUpdateProducts && (
-          <UpdateButton onClick={() => setUpdateModalVisibility(true)} />
+          <ActionButton
+            text="Update"
+            type="success"
+            onClick={() => setUpdateModalVisibility(true)}
+          />
         )}
         {canDeleteProducts && (
-          <DeleteButton onClick={() => setDeleteModalVisibility(true)} />
+          <ActionButton
+            text="Delete"
+            type="danger"
+            onClick={() => setDeleteModalVisibility(true)}
+          />
         )}
       </td>
       {canUpdate && (
