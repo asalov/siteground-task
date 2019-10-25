@@ -7,6 +7,7 @@ const ProductFormFields = ({ name, price, currency, handleChange }) => (
     <FormGroup controlId="name">
       <ControlLabel>Name</ControlLabel>
       <FormControl
+        data-testid="product-name"
         type="text"
         value={name}
         placeholder="Product name"
@@ -16,6 +17,7 @@ const ProductFormFields = ({ name, price, currency, handleChange }) => (
     <FormGroup controlId="price">
       <ControlLabel>Price</ControlLabel>
       <FormControl
+        data-testid="product-price"
         type="text"
         value={price}
         placeholder="Price"
@@ -25,6 +27,7 @@ const ProductFormFields = ({ name, price, currency, handleChange }) => (
     <FormGroup controlId="currency">
       <ControlLabel>Currency</ControlLabel>
       <FormControl
+        data-testid="product-currency"
         type="text"
         value={currency}
         placeholder="Currency"

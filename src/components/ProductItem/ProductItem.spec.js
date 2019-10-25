@@ -23,30 +23,36 @@ describe("ProductItem", () => {
   });
 
   it("should show update button & modal", () => {
-    const { getByText, queryByText } = renderWithRedux(productItem, {
+    const { getByTestId, queryByTestId } = renderWithRedux(productItem, {
       initialState: { permissions: { data: ["UPDATE"] } }
     });
 
-    const updateButton = getByText("Update");
+    const updateButton = getByTestId("update-product-button");
     expect(updateButton).toBeVisible();
-    expect(queryByText("Delete")).toBeNull();
+    expect(queryByTestId("delete-product-button")).toBeNull();
 
     fireEvent.click(updateButton);
 
-    expect(getByText(`Update ${product.name}`)).toBeVisible();
+    const updateModalTitle = getByTestId("modal-title");
+
+    expect(updateModalTitle).toBeVisible();
+    expect(updateModalTitle).toHaveTextContent(`Update ${product.name}`);
   });
 
   it("should show delete button & modal", () => {
-    const { getByText, queryByText } = renderWithRedux(productItem, {
+    const { getByTestId, queryByTestId } = renderWithRedux(productItem, {
       initialState: { permissions: { data: ["DELETE"] } }
     });
 
-    const deleteButton = getByText("Delete");
+    const deleteButton = getByTestId("delete-product-button");
     expect(deleteButton).toBeVisible();
-    expect(queryByText("Update")).toBeNull();
+    expect(queryByTestId("update-product-button")).toBeNull();
 
     fireEvent.click(deleteButton);
 
-    expect(getByText(`Delete ${product.name}`)).toBeVisible();
+    const deleteModalTitle = getByTestId("modal-title");
+
+    expect(deleteModalTitle).toBeVisible();
+    expect(deleteModalTitle).toHaveTextContent(`Delete ${product.name}`);
   });
 });

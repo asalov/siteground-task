@@ -20,6 +20,7 @@ const ProductItem = ({ product }) => {
       <td>
         {canUpdateProducts && (
           <ActionButton
+            data-testid="update-product-button"
             text="Update"
             buttonStyle="success"
             onClick={() => setUpdateModalVisibility(true)}
@@ -27,6 +28,7 @@ const ProductItem = ({ product }) => {
         )}
         {canDeleteProducts && (
           <ActionButton
+            data-testid="delete-product-button"
             text="Delete"
             buttonStyle="danger"
             onClick={() => setDeleteModalVisibility(true)}

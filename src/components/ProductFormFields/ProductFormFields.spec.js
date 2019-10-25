@@ -10,24 +10,28 @@ describe("ProductFormFields", () => {
       price: 50,
       currency: "USD"
     };
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <ProductFormFields {...formValues} handleChange={() => {}} />
     );
 
-    expect(getByLabelText("Name")).toHaveValue(formValues.name);
-    expect(getByLabelText("Price")).toHaveValue(formValues.price.toString());
-    expect(getByLabelText("Currency")).toHaveValue(formValues.currency);
+    expect(getByTestId("product-name")).toHaveValue(formValues.name);
+    expect(getByTestId("product-price")).toHaveValue(
+      formValues.price.toString()
+    );
+    expect(getByTestId("product-currency")).toHaveValue(formValues.currency);
   });
 
   it("should call on change handler", () => {
     const handleChangeHandler = jest.fn();
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <ProductFormFields handleChange={handleChangeHandler} />
     );
 
-    fireEvent.change(getByLabelText("Name"), { target: { value: "Test" } });
+    fireEvent.change(getByTestId("product-name"), {
+      target: { value: "Test" }
+    });
 
-    expect(getByLabelText("Name")).toHaveValue("Test");
+    expect(getByTestId("product-name")).toHaveValue("Test");
     expect(handleChangeHandler).toHaveBeenCalled();
   });
 });

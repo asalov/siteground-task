@@ -6,18 +6,18 @@ import AddProductForm from "./AddProductForm";
 
 describe("AddProductForm", () => {
   it("should disable submit button if some fields are empty", () => {
-    const { getByText } = renderWithRedux(<AddProductForm />);
+    const { getByTestId } = renderWithRedux(<AddProductForm />);
 
-    expect(getByText("Add")).toBeDisabled();
+    expect(getByTestId("add-product-button")).toBeDisabled();
   });
 
   it("should enable submit button if all fields are filled in", () => {
-    const { getByText, getByLabelText } = renderWithRedux(<AddProductForm />);
+    const { getByTestId, getByLabelText } = renderWithRedux(<AddProductForm />);
 
     fireEvent.change(getByLabelText("Name"), { target: { value: "Product" } });
     fireEvent.change(getByLabelText("Price"), { target: { value: "100" } });
     fireEvent.change(getByLabelText("Currency"), { target: { value: "GBP" } });
 
-    expect(getByText("Add")).toBeEnabled();
+    expect(getByTestId("add-product-button")).toBeEnabled();
   });
 });

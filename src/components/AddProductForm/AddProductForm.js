@@ -26,10 +26,11 @@ const AddProductForm = () => {
 
   return (
     <div>
-      <h3>Add New Product</h3>
+      <h3 data-testid="add-product-form-title">Add New Product</h3>
       <form>
         <ProductFormFields handleChange={handleChange} {...formState} />
         <ActionButton
+          data-testid="add-product-button"
           text="Add"
           buttonStyle="primary"
           disabled={!isFormValid()}
