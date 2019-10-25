@@ -30,8 +30,8 @@ const AddProductForm = () => {
       <form>
         <ProductFormFields handleChange={handleChange} {...formState} />
         <ActionButton
-          type="primary"
           text="Add"
+          buttonStyle="primary"
           disabled={!isFormValid()}
           onClick={handleSubmit}
         />

@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Modal } from "react-bootstrap";
 
 import { deleteProduct } from "actions/products";
-import ActionButton from "components/ActionButton/ActionButton";
+import ProductModal from "../ProductModal/ProductModal";
 
 const DeleteProductModal = ({ show, product, onClose }) => {
   const dispatch = useDispatch();
@@ -13,17 +12,19 @@ const DeleteProductModal = ({ show, product, onClose }) => {
     onClose();
   };
 
+  const actionButtonConfig = [
+    { text: "Yes", style: "danger", onClick: removeProduct },
+    { text: "No", onClick: onClose }
+  ];
+
   return (
-    <Modal show={show} onHide={onClose}>
-      <Modal.Header>
-        <Modal.Title>Delete {product.name}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>Are you sure you want to delete this product?</Modal.Body>
-      <Modal.Footer>
-        <ActionButton type="danger" text="Yes" onClick={removeProduct} />
-        <ActionButton type="default" text="No" onClick={onClose} />
-      </Modal.Footer>
-    </Modal>
+    <ProductModal
+      show={show}
+      title={`Delete ${product.name}`}
+      content={"Are you sure you want to delete this product?"}
+      actionButtons={actionButtonConfig}
+      onClose={onClose}
+    />
   );
 };
 

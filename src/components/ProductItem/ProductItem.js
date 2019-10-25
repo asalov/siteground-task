@@ -21,26 +21,26 @@ const ProductItem = ({ product }) => {
         {canUpdateProducts && (
           <ActionButton
             text="Update"
-            type="success"
+            buttonStyle="success"
             onClick={() => setUpdateModalVisibility(true)}
           />
         )}
         {canDeleteProducts && (
           <ActionButton
             text="Delete"
-            type="danger"
+            buttonStyle="danger"
             onClick={() => setDeleteModalVisibility(true)}
           />
         )}
       </td>
-      {canUpdate && (
+      {canUpdateProducts && (
         <UpdateProductModal
           product={product}
           show={isUpdateModalVisible}
           onClose={() => setUpdateModalVisibility(false)}
         />
       )}
-      {canDelete && (
+      {canDeleteProducts && (
         <DeleteProductModal
           product={product}
           show={isDeleteModalVisible}

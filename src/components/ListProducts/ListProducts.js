@@ -19,7 +19,7 @@ const ListProducts = ({ products }) => {
             <th></th>
           </tr>
         </thead>
-        <tbody>{rows}</tbody>
+        <tbody data-testid="product-list">{rows}</tbody>
       </table>
     </div>
   );
