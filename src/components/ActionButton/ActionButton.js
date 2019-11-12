@@ -2,7 +2,13 @@ import React from "react";
 
 import { Button } from "react-bootstrap";
 
-const ActionButton = ({ text, buttonStyle, onClick, disabled, ...props }) => (
+const ActionButton = ({
+  text,
+  buttonStyle = "default",
+  onClick,
+  disabled = false,
+  ...props
+}) => (
   <Button
     onClick={onClick}
     bsStyle={buttonStyle}

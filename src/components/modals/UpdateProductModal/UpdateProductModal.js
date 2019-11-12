@@ -4,25 +4,31 @@ import { useDispatch } from "react-redux";
 import { updateProduct } from "actions/products";
 import { useFormState } from "hooks/useFormState";
 import ProductFormFields from "components/ProductFormFields/ProductFormFields";
-import ProductModal from "../ProductModal/ProductModal";
+import ProductModal from "components/modals/ProductModal/ProductModal";
+import ActionButton from "components/ActionButton/ActionButton";
 
 const UpdateProductModal = ({ show, product, onClose }) => {
   const dispatch = useDispatch();
-  const [productDetails, handleChange] = useFormState({ ...product });
+  const [productDetails, handleChange, resetForm] = useFormState({
+    ...product
+  });
 
   const handleUpdate = () => {
     dispatch(updateProduct(productDetails));
     onClose();
   };
 
-  const actionButtonConfig = [
-    {
-      text: "Save",
-      style: "primary",
-      onClick: handleUpdate
-    },
-    { text: "Cancel", onClick: onClose }
-  ];
+  const handleModalClose = () => {
+    onClose();
+    resetForm();
+  };
+
+  const renderModalButtons = () => (
+    <>
+      <ActionButton buttonStyle="primary" text="Save" onClick={handleUpdate} />
+      <ActionButton text="Cancel" onClick={handleModalClose} />
+    </>
+  );
 
   return (
     <ProductModal
@@ -31,8 +37,8 @@ const UpdateProductModal = ({ show, product, onClose }) => {
       content={
         <ProductFormFields handleChange={handleChange} {...productDetails} />
       }
-      actionButtons={actionButtonConfig}
-      onClose={onClose}
+      modalButtons={renderModalButtons()}
+      onClose={handleModalClose}
     />
   );
 };
